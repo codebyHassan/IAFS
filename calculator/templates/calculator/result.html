@@ -1,0 +1,365 @@
+{% extends 'calculator/base.html' %}
+
+{% block title %}Calculation Result{% endblock %}
+
+{% block extra_css %}
+<style>
+    .result-hero {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        padding: 80px 0 60px;
+        position: relative;
+    }
+    
+    .result-hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        color: white;
+        text-align: center;
+        animation: fadeInDown 0.8s ease-out;
+    }
+    
+    .result-icon {
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        animation: bounceIn 1s ease-out;
+    }
+    
+    .result-icon i {
+        font-size: 3rem;
+        color: white;
+    }
+    
+    .premium-card {
+        background: white;
+        border-radius: 24px;
+        padding: 50px;
+        box-shadow: var(--card-shadow);
+        margin-top: -50px;
+        position: relative;
+        animation: fadeInUp 0.8s ease-out;
+    }
+    
+    .premium-amount {
+        text-align: center;
+        padding: 40px;
+        background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        border-radius: 20px;
+        margin-bottom: 40px;
+    }
+    
+    .premium-label {
+        color: #64748b;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    
+    .premium-value {
+        font-size: 4rem;
+        font-weight: 800;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+    }
+    
+    .premium-period {
+        color: #64748b;
+        font-size: 1.2rem;
+        margin-top: 10px;
+    }
+    
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+    
+    .detail-label {
+        color: #64748b;
+        font-weight: 600;
+    }
+    
+    .detail-value {
+        color: #1a202c;
+        font-weight: 700;
+    }
+    
+    .risk-badge {
+        display: inline-block;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+    }
+    
+    .risk-low {
+        background: #10b98120;
+        color: #10b981;
+    }
+    
+    .risk-medium {
+        background: #f59e0b20;
+        color: #f59e0b;
+    }
+    
+    .risk-high {
+        background: #ef444420;
+        color: #ef4444;
+    }
+    
+    .action-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 40px;
+    }
+    
+    .btn-action {
+        padding: 16px;
+        border-radius: 12px;
+        font-weight: 600;
+        text-align: center;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        border: none;
+        font-size: 1rem;
+    }
+    
+    .btn-primary-action {
+        background: var(--primary-gradient);
+        color: white;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+    
+    .btn-primary-action:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        color: white;
+    }
+    
+    .btn-secondary-action {
+        background: white;
+        color: #667eea;
+        border: 2px solid #667eea;
+    }
+    
+    .btn-secondary-action:hover {
+        background: #667eea;
+        color: white;
+    }
+
+    .btn-success-action {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-success-action:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        color: white;
+    }
+
+    .cta-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        padding: 30px;
+        margin-top: 30px;
+        color: white;
+        text-align: center;
+    }
+
+    .cta-box h4 {
+        color: white;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+
+    .cta-box p {
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 20px;
+    }
+    
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes bounceIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        70% {
+            transform: scale(0.9);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="result-hero">
+    <div class="container">
+        <div class="result-icon">
+            <i class="fas {{ calculation.icon }}"></i>
+        </div>
+        <h1>{{ calculation.type }}</h1>
+    </div>
+</section>
+
+<div class="container" style="margin-top: 60px; margin-bottom: 80px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="premium-card">
+                <!-- Premium Amount -->
+                <div class="premium-amount">
+                    <div class="premium-label">Your Monthly Premium</div>
+                    <div class="premium-value">PKR {{ calculation.result.monthly_premium|floatformat:0 }}</div>
+                    <div class="premium-period">per month</div>
+                </div>
+                
+                <!-- Details -->
+                <h4 style="margin-bottom: 25px; color: #1a202c;">
+                    <i class="fas fa-file-invoice"></i> Premium Breakdown
+                </h4>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Monthly Premium</span>
+                    <span class="detail-value">PKR {{ calculation.result.monthly_premium|floatformat:0 }}</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Yearly Premium</span>
+                    <span class="detail-value">PKR {{ calculation.result.yearly_premium|floatformat:0 }}</span>
+                </div>
+                
+                {% if calculation.result.total_payable %}
+                <div class="detail-row">
+                    <span class="detail-label">Total Payable (Full Term)</span>
+                    <span class="detail-value">PKR {{ calculation.result.total_payable|floatformat:0 }}</span>
+                </div>
+                {% endif %}
+                
+                {% if calculation.result.maturity_benefit %}
+                <div class="detail-row">
+                    <span class="detail-label">Maturity Benefit</span>
+                    <span class="detail-value">PKR {{ calculation.result.maturity_benefit|floatformat:0 }}</span>
+                </div>
+                {% endif %}
+                
+                {% if calculation.result.idv %}
+                <div class="detail-row">
+                    <span class="detail-label">Insured Declared Value (IDV)</span>
+                    <span class="detail-value">PKR {{ calculation.result.idv|floatformat:0 }}</span>
+                </div>
+                {% endif %}
+                
+                {% if calculation.result.bmi %}
+                <div class="detail-row">
+                    <span class="detail-label">Your BMI</span>
+                    <span class="detail-value">{{ calculation.result.bmi }} ({{ calculation.result.bmi_category }})</span>
+                </div>
+                {% endif %}
+                
+                {% if calculation.result.building_age %}
+                <div class="detail-row">
+                    <span class="detail-label">Building Age</span>
+                    <span class="detail-value">{{ calculation.result.building_age }} years</span>
+                </div>
+                {% endif %}
+                
+                {% if calculation.result.depreciation %}
+                <div class="detail-row">
+                    <span class="detail-label">Depreciation</span>
+                    <span class="detail-value">{{ calculation.result.depreciation }}%</span>
+                </div>
+                {% endif %}
+                
+                <div class="detail-row">
+                    <span class="detail-label">Risk Level</span>
+                    <span class="detail-value">
+                        <span class="risk-badge risk-{{ calculation.result.risk_level|lower }}">
+                            {{ calculation.result.risk_level }}
+                        </span>
+                    </span>
+                </div>
+
+                <!-- Call to Action for Logged In Users -->
+                {% if user.is_authenticated %}
+                <div class="cta-box">
+                    <h4><i class="fas fa-shield-alt"></i> Secure Your Future Today!</h4>
+                    <p>Get instant coverage with our one-click purchase. Your policy will be activated immediately after payment.</p>
+                    <form method="POST" action="{% url 'buy_policy' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-action btn-success-action" style="font-size: 1.1rem; padding: 18px 50px;">
+                            <i class="fas fa-shopping-cart"></i> Buy This Policy Now
+                        </button>
+                    </form>
+                </div>
+                {% else %}
+                <div class="cta-box">
+                    <h4><i class="fas fa-user-lock"></i> Ready to Get Insured?</h4>
+                    <p>Login or create an account to purchase this policy and get instant coverage!</p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a href="{% url 'login' %}" class="btn btn-action" style="background: white; color: #667eea; padding: 14px 40px;">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                        <a href="{% url 'register' %}" class="btn btn-action" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white; padding: 14px 40px;">
+                            <i class="fas fa-user-plus"></i> Register
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <a href="javascript:window.print()" class="btn-action btn-secondary-action">
+                        <i class="fas fa-print"></i> Print Quote
+                    </a>
+                    <a href="{% url 'home' %}" class="btn-action btn-primary-action">
+                        <i class="fas fa-calculator"></i> New Calculation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

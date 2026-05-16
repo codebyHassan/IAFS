@@ -1,0 +1,484 @@
+{% extends 'calculator/base2.html' %}
+{% load static %}
+
+{% block title %}Contact Us - Insurance Automation & Facilitation System{% endblock %}
+
+{% block extra_css %}
+<style>
+    .contact-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 80px 0;
+        color: white;
+        text-align: center;
+    }
+
+    .contact-hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+    }
+
+    .contact-hero p {
+        font-size: 1.2rem;
+        opacity: 0.95;
+    }
+
+    .contact-section {
+        padding: 80px 0;
+    }
+
+    .contact-info-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: var(--card-shadow);
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .contact-info-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--card-shadow-hover);
+    }
+
+    .contact-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+        color: white;
+    }
+
+    .contact-icon.icon-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .contact-icon.icon-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+    .contact-icon.icon-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+    .contact-icon.icon-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+
+    .contact-info-card h4 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #1a202c;
+    }
+
+    .contact-info-card p {
+        color: #718096;
+        margin-bottom: 5px;
+    }
+
+    .contact-info-card a {
+        color: #667eea;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .contact-info-card a:hover {
+        color: #764ba2;
+    }
+
+    .contact-form-card {
+        background: white;
+        border-radius: 20px;
+        padding: 50px;
+        box-shadow: var(--card-shadow);
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #1a202c;
+        margin-bottom: 10px;
+    }
+
+    .form-control, .form-select {
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 12px 20px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .btn-submit {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 15px 40px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+
+    .map-container {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        height: 400px;
+    }
+
+    .faq-section {
+        padding: 80px 0;
+        background: linear-gradient(180deg, #f8f9ff 0%, #ffffff 100%);
+    }
+
+    .accordion-item {
+        border: none;
+        margin-bottom: 15px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .accordion-button {
+        background: white;
+        color: #1a202c;
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 20px 25px;
+        border: none;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        box-shadow: none;
+    }
+
+    .accordion-button:focus {
+        box-shadow: none;
+        border: none;
+    }
+
+    .accordion-body {
+        padding: 20px 25px;
+        color: #718096;
+        line-height: 1.6;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .social-link {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f7fafc;
+        color: #667eea;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 1.3rem;
+    }
+
+    .social-link:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Contact Hero -->
+<section class="contact-hero">
+    <div class="container">
+        <h1>Get In Touch</h1>
+        <p>We're here to help and answer any question you might have</p>
+    </div>
+</section>
+
+<!-- Contact Info -->
+<section class="contact-section">
+    <div class="container">
+        <div class="row g-4 mb-5">
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-info-card text-center">
+                    <div class="contact-icon icon-1 mx-auto">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h4>Visit Us</h4>
+                    <p>Main Boulevard,</p>
+                    <p>Gulberg III, Lahore,</p>
+                    <p>Pakistan</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-info-card text-center">
+                    <div class="contact-icon icon-2 mx-auto">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h4>Call Us</h4>
+                    <p><a href="tel:+923001234567">+92 300 1234567</a></p>
+                    <p><a href="tel:+924235678901">+92 42 35678901</a></p>
+                    <p>Mon-Fri: 9AM - 6PM</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-info-card text-center">
+                    <div class="contact-icon icon-3 mx-auto">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h4>Email Us</h4>
+                    <p><a href="mailto:info@pakinsure.pk">info@pakinsure.pk</a></p>
+                    <p><a href="mailto:support@pakinsure.pk">support@pakinsure.pk</a></p>
+                    <p>24/7 Support</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-info-card text-center">
+                    <div class="contact-icon icon-4 mx-auto">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4>Working Hours</h4>
+                    <p>Monday - Friday</p>
+                    <p>9:00 AM - 6:00 PM</p>
+                    <p>Saturday: 10AM - 4PM</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="contact-form-card">
+                    <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 10px; color: #1a202c;">Send us a Message</h2>
+                    <p style="color: #718096; margin-bottom: 30px;">Fill out the form below and we'll get back to you shortly</p>
+                    
+                   <!-- Flash Messages -->
+{% if messages %}
+<div class="container mt-4">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert"
+         style="border-radius: 10px; font-weight: 500;">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<form method="post" novalidate>
+    {% csrf_token %}
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">First Name *</label>
+            {{ form.first_name }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Last Name *</label>
+            {{ form.last_name }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Email Address *</label>
+            {{ form.email }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Phone Number *</label>
+            {{ form.phone }}
+        </div>
+        <div class="col-12">
+            <label class="form-label">Subject *</label>
+            {{ form.subject }}
+        </div>
+        <div class="col-12">
+            <label class="form-label">Message *</label>
+            {{ form.message }}
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-submit">
+                <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+        </div>
+    </div>
+</form>
+
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3402.104064521447!2d74.35787631512198!3d31.509277081360386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391905eb0fd141a7%3A0x4c6f1b9f8e8d8e8d!2sGulberg%20III%2C%20Lahore%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1635789456789!5m2!1sen!2s" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+                
+                <div class="contact-form-card mt-4">
+                    <h4 style="font-weight: 700; margin-bottom: 15px; color: #1a202c;">Follow Us</h4>
+                    <p style="color: #718096; margin-bottom: 20px;">Stay connected on social media</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+    <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Quick answers to common questions</p>
+        
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                        <i class="fas fa-question-circle me-2"></i> How do I purchase an insurance policy?
+                    </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Simply select your desired policy type, use our AI calculator to get a premium quote, 
+                        fill in your details, and make payment via JazzCash or EasyPaisa. You'll receive your 
+                        policy documents instantly via email.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                        <i class="fas fa-question-circle me-2"></i> How does the AI premium calculator work?
+                    </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Our AI calculator analyzes various factors like age, health status, coverage amount, 
+                        and risk factors to provide you with an accurate premium estimate. It uses machine 
+                        learning algorithms trained on extensive insurance data.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                        <i class="fas fa-question-circle me-2"></i> What payment methods do you accept?
+                    </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        We accept payments through JazzCash and EasyPaisa mobile wallets. Both methods are 
+                        secure, instant, and convenient for our Pakistani customers.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                        <i class="fas fa-question-circle me-2"></i> How do I file a claim?
+                    </button>
+                </h2>
+                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Login to your account, go to "My Policies", select the policy you want to claim, 
+                        click "File Claim", upload required documents, and submit. You can track your claim 
+                        status in real-time from your dashboard.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                        <i class="fas fa-question-circle me-2"></i> How long does claim processing take?
+                    </button>
+                </h2>
+                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Most claims are processed within 7-10 business days. However, simple claims may be 
+                        approved even faster. You'll receive regular updates via email and SMS throughout 
+                        the process.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                        <i class="fas fa-question-circle me-2"></i> Is my personal information secure?
+                    </button>
+                </h2>
+                <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Absolutely! We use bank-level encryption (256-bit SSL) to protect your data. Your 
+                        information is stored securely and we never share it with third parties without your 
+                        explicit consent.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Simulate form submission
+        const btn = this.querySelector('.btn-submit');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        btn.disabled = true;
+        
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+            btn.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+            
+            setTimeout(() => {
+                this.reset();
+                btn.innerHTML = originalText;
+                btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                btn.disabled = false;
+                
+                // Show success message
+                alert('Thank you for contacting us! We will get back to you soon.');
+            }, 2000);
+        }, 2000);
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,240 @@
+{% extends 'calculator/base.html' %}
+
+{% block title %}Register - Insurance Automation & Faciltion System {% endblock %}
+
+{% block extra_css %}
+<style>
+    .auth-hero {
+        background: var(--primary-gradient);
+        padding: 60px 0 100px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .auth-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.3;
+    }
+
+    .auth-card {
+        background: white;
+        border-radius: 24px;
+        padding: 50px;
+        box-shadow: var(--card-shadow);
+        margin-top: -50px;
+        position: relative;
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .auth-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: var(--primary-gradient);
+        border-radius: 24px 24px 0 0;
+    }
+
+    .auth-icon {
+        width: 80px;
+        height: 80px;
+        background: var(--primary-gradient);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 30px;
+        animation: bounceIn 1s ease-out;
+    }
+
+    .auth-icon i {
+        font-size: 2.5rem;
+        color: white;
+    }
+
+    .form-control, .form-select {
+        padding: 14px 18px;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        background: #f8fafc;
+    }
+
+    .form-control:focus, .form-select:focus {
+        outline: none;
+        border-color: #667eea;
+        background: white;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .btn-register {
+        background: var(--primary-gradient);
+        border: none;
+        padding: 16px;
+        border-radius: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        color: white;
+        width: 100%;
+    }
+
+    .btn-register:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        color: white;
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounceIn {
+        0% { opacity: 0; transform: scale(0.3); }
+        50% { transform: scale(1.05); }
+        70% { transform: scale(0.9); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="auth-hero">
+    <div class="container">
+        <h1 class="text-center text-white" style="font-size: 2.5rem; font-weight: 800;">Create Your Account</h1>
+        <p class="text-center text-white" style="font-size: 1.2rem; opacity: 0.9;">Join thousands of satisfied customers</p>
+    </div>
+</section>
+
+<div class="container" style="margin-top: 60px; margin-bottom: 80px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="auth-card">
+                <div class="auth-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+
+                <h3 class="text-center mb-4" style="color: #1a202c; font-weight: 700;">Register Now</h3>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" style="font-weight: 600; color: #1a202c;">Username <span class="text-danger">*</span></label>
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                                <div class="text-danger small mt-1">{{ form.username.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" style="font-weight: 600; color: #1a202c;">Email <span class="text-danger">*</span></label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="text-danger small mt-1">{{ form.email.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" style="font-weight: 600; color: #1a202c;">First Name <span class="text-danger">*</span></label>
+                            {{ form.first_name }}
+                            {% if form.first_name.errors %}
+                                <div class="text-danger small mt-1">{{ form.first_name.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" style="font-weight: 600; color: #1a202c;">Last Name <span class="text-danger">*</span></label>
+                            {{ form.last_name }}
+                            {% if form.last_name.errors %}
+                                <div class="text-danger small mt-1">{{ form.last_name.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" style="font-weight: 600; color: #1a202c;">Phone <span class="text-danger">*</span></label>
+                            {{ form.phone }}
+                            {% if form.phone.errors %}
+                                <div class="text-danger small mt-1">{{ form.phone.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" style="font-weight: 600; color: #1a202c;">CNIC <span class="text-danger">*</span></label>
+                            {{ form.cnic }}
+                            {% if form.cnic.errors %}
+                                <div class="text-danger small mt-1">{{ form.cnic.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" style="font-weight: 600; color: #1a202c;">Date of Birth <span class="text-danger">*</span></label>
+                            {{ form.date_of_birth }}
+                            {% if form.date_of_birth.errors %}
+                                <div class="text-danger small mt-1">{{ form.date_of_birth.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" style="font-weight: 600; color: #1a202c;">City <span class="text-danger">*</span></label>
+                            {{ form.city }}
+                            {% if form.city.errors %}
+                                <div class="text-danger small mt-1">{{ form.city.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-12 mb-3">
+                            <label class="form-label" style="font-weight: 600; color: #1a202c;">Address <span class="text-danger">*</span></label>
+                            {{ form.address }}
+                            {% if form.address.errors %}
+                                <div class="text-danger small mt-1">{{ form.address.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" style="font-weight: 600; color: #1a202c;">Password <span class="text-danger">*</span></label>
+                            {{ form.password1 }}
+                            {% if form.password1.errors %}
+                                <div class="text-danger small mt-1">{{ form.password1.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" style="font-weight: 600; color: #1a202c;">Confirm Password <span class="text-danger">*</span></label>
+                            {{ form.password2 }}
+                            {% if form.password2.errors %}
+                                <div class="text-danger small mt-1">{{ form.password2.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-register mt-3" >
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                </form>
+
+                <div class="text-center mt-4">
+                    <p style="color: #64748b;">Already have an account? 
+                        <a href="{% url 'login' %}" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                            Login Here
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

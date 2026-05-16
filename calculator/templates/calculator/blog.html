@@ -1,0 +1,509 @@
+{% extends 'calculator/base2.html' %}
+{% load static %}
+
+{% block title %}Blog - Insurance Automation & Facilitation System{% endblock %}
+
+{% block extra_css %}
+<style>
+    .blog-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 80px 0;
+        color: white;
+        text-align: center;
+    }
+
+    .blog-hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+    }
+
+    .blog-hero p {
+        font-size: 1.2rem;
+        opacity: 0.95;
+    }
+
+    .blog-section {
+        padding: 80px 0;
+    }
+
+    .blog-filters {
+        margin-bottom: 40px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .filter-btn {
+        padding: 10px 25px;
+        border-radius: 50px;
+        border: 2px solid #e2e8f0;
+        background: white;
+        color: #718096;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-color: #667eea;
+        transform: translateY(-2px);
+    }
+
+    .blog-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        transition: all 0.4s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--card-shadow-hover);
+    }
+
+    .blog-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        position: relative;
+    }
+
+    .blog-image::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 100%);
+    }
+
+    .blog-category {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: white;
+        color: #667eea;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        z-index: 2;
+    }
+
+    .blog-content {
+        padding: 30px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .blog-meta {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 15px;
+        color: #718096;
+        font-size: 0.9rem;
+    }
+
+    .blog-meta i {
+        color: #667eea;
+    }
+
+    .blog-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #1a202c;
+        line-height: 1.4;
+    }
+
+    .blog-title a {
+        color: #1a202c;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .blog-title a:hover {
+        color: #667eea;
+    }
+
+    .blog-excerpt {
+        color: #718096;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        flex-grow: 1;
+    }
+
+    .blog-author {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding-top: 20px;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    .author-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+    }
+
+    .author-info {
+        flex-grow: 1;
+    }
+
+    .author-name {
+        font-weight: 600;
+        color: #1a202c;
+        margin: 0;
+    }
+
+    .author-role {
+        font-size: 0.85rem;
+        color: #718096;
+        margin: 0;
+    }
+
+    .read-more {
+        color: #667eea;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .read-more:hover {
+        color: #764ba2;
+        gap: 10px;
+    }
+
+    .read-more i {
+        transition: transform 0.3s ease;
+    }
+
+    .read-more:hover i {
+        transform: translateX(5px);
+    }
+
+    .featured-post {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        margin-bottom: 60px;
+    }
+
+    .featured-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+    }
+
+    .featured-image {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 400px;
+        position: relative;
+    }
+
+    .featured-text {
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .featured-badge {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: 20px;
+        width: fit-content;
+    }
+
+    .featured-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        color: #1a202c;
+        line-height: 1.2;
+    }
+
+    .featured-excerpt {
+        font-size: 1.1rem;
+        color: #718096;
+        line-height: 1.7;
+        margin-bottom: 30px;
+    }
+
+    .btn-featured {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px 35px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-block;
+        width: fit-content;
+        transition: all 0.3s ease;
+    }
+
+    .btn-featured:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        color: white;
+    }
+
+    .newsletter-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 60px 0;
+        color: white;
+        text-align: center;
+        margin-top: 80px;
+    }
+
+    .newsletter-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+
+    .newsletter-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+    }
+
+    .newsletter-form {
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+        gap: 10px;
+    }
+
+    .newsletter-input {
+        flex-grow: 1;
+        padding: 15px 25px;
+        border-radius: 50px;
+        border: none;
+        font-size: 1rem;
+    }
+
+    .newsletter-input:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+    }
+
+    .btn-newsletter {
+        background: white;
+        color: #667eea;
+        padding: 15px 35px;
+        border-radius: 50px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-newsletter:hover {
+        background: #f7fafc;
+        transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+        .featured-content {
+            grid-template-columns: 1fr;
+        }
+        
+        .featured-image {
+            min-height: 300px;
+        }
+        
+        .featured-text {
+            padding: 30px;
+        }
+        
+        .featured-title {
+            font-size: 1.8rem;
+        }
+        
+        .newsletter-form {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Blog Hero -->
+<section class="blog-hero">
+    <div class="container">
+        <h1>Insurance Insights & News</h1>
+        <p>Stay informed with the latest trends, tips, and updates from the insurance industry</p>
+    </div>
+</section>
+
+<!-- Blog Section -->
+<section class="blog-section">
+    <div class="container">
+        <!-- Featured Post -->
+        <div class="featured-post">
+            <div class="featured-content">
+                <div class="featured-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect fill='%23667eea' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='100' fill='%23ffffff' opacity='0.3'%3EFEATURED%3C/text%3E%3C/svg%3E" 
+                         style="width: 100%; height: 100%; object-fit: cover;" alt="Featured">
+                </div>
+                <div class="featured-text">
+                    <div class="featured-badge">
+                        <i class="fas fa-star"></i> Featured Post
+                    </div>
+                    <h2 class="featured-title">The Future of Insurance: AI & Automation in Pakistan</h2>
+                    <p class="featured-excerpt">
+                        Discover how artificial intelligence is revolutionizing the insurance industry in Pakistan. 
+                        Learn about the benefits of automated claim processing, instant premium calculations, and 
+                        digital policy management.
+                    </p>
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> January 15, 2024</span>
+                        <span><i class="fas fa-clock"></i> 8 min read</span>
+                    </div>
+                    <a href="#" class="btn-featured">
+                        <i class="fas fa-book-open"></i> Read Full Article
+                    </a>
+                </div>
+            </div>
+        </div>
+
+     
+
+<div class="row g-4">
+    {% for post in blogs %}
+    <div class="col-lg-4 col-md-6">
+        <div class="blog-card">
+            <div class="blog-image" style="position: relative;">
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                {% else %}
+                    <img src="{% static 'images/default-blog.jpg' %}" alt="Default" style="width: 100%; height: 100%; object-fit: cover;">
+                {% endif %}
+                <span class="blog-category">{{ post.get_category_display }}</span>
+            </div>
+            <div class="blog-content">
+                <div class="blog-meta">
+                    <span><i class="fas fa-calendar"></i> {{ post.created_at|date:"M d, Y" }}</span>
+                    <span><i class="fas fa-clock"></i> {{ post.read_time }} min</span>
+                </div>
+                <h3 class="blog-title">
+                    <a href="{% url 'blog_detail' post.slug %}">{{ post.title }}</a>
+                </h3>
+                <p class="blog-excerpt">{{ post.excerpt }}</p>
+                <div class="blog-author">
+                    <div class="author-avatar">{{ post.author|slice:":2"|upper }}</div>
+                    <div class="author-info">
+                        <p class="author-name">{{ post.author }}</p>
+                        <p class="author-role">{{ post.role }}</p>
+                    </div>
+                    <a href="{% url 'blog_detail' post.slug %}" class="read-more">
+                        Read <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No blog posts yet.</p>
+    {% endfor %}
+</div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-5">
+            <button class="btn btn-featured" id="loadMore">
+                <i class="fas fa-plus-circle"></i> Load More Articles
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter-section">
+    <div class="container">
+        <h2 class="newsletter-title">Subscribe to Our Newsletter</h2>
+        <p class="newsletter-subtitle">
+            Get the latest insurance tips, news, and exclusive offers delivered to your inbox
+        </p>
+        <form class="newsletter-form" id="newsletterForm">
+            <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+            <button type="submit" class="btn-newsletter">
+                <i class="fas fa-paper-plane"></i> Subscribe
+            </button>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            const category = this.getAttribute('data-category');
+            console.log('Filter by:', category);
+            // Add actual filtering logic here
+        });
+    });
+
+    // Newsletter form
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('.btn-newsletter');
+        const originalText = btn.innerHTML;
+        
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subscribing...';
+        btn.disabled = true;
+        
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-check"></i> Subscribed!';
+            
+            setTimeout(() => {
+                this.reset();
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                alert('Thank you for subscribing to our newsletter!');
+            }, 2000);
+        }, 1500);
+    });
+
+    // Load more functionality
+    document.getElementById('loadMore').addEventListener('click', function() {
+        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+        
+        setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-check"></i> All articles loaded';
+            this.disabled = true;
+        }, 1500);
+    });
+</script>
+{% endblock %}

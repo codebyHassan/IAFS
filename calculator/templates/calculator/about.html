@@ -1,0 +1,618 @@
+{% extends 'calculator/base2.html' %}
+{% load static %}
+
+{% block title %}About Us - Insurance Automation & Facilitation System{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* About Hero */
+    .about-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 80px 0;
+        color: white;
+        text-align: center;
+    }
+
+    .about-hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+    }
+
+    .about-hero p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto;
+        opacity: 0.95;
+    }
+
+    /* Mission Vision */
+    .mission-vision {
+        padding: 80px 0;
+    }
+
+    .mv-card {
+        background: white;
+        border-radius: 20px;
+        padding: 50px 40px;
+        box-shadow: var(--card-shadow);
+        transition: all 0.4s ease;
+        height: 100%;
+        border: 2px solid transparent;
+    }
+
+    .mv-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--card-shadow-hover);
+        border-color: #667eea;
+    }
+
+    .mv-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+        font-size: 2.5rem;
+        color: white;
+    }
+
+    .mv-icon.mission {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .mv-icon.vision {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    .mv-card h3 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #1a202c;
+    }
+
+    .mv-card p {
+        color: #718096;
+        line-height: 1.8;
+        font-size: 1.05rem;
+    }
+
+    /* Values Section */
+    .values-section {
+        padding: 80px 0;
+        background: linear-gradient(180deg, #f8f9ff 0%, #ffffff 100%);
+    }
+
+    .value-card {
+        text-align: center;
+        padding: 40px 30px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .value-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--card-shadow-hover);
+    }
+
+    .value-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 2rem;
+        color: white;
+    }
+
+    .value-icon.v1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .value-icon.v2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+    .value-icon.v3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+    .value-icon.v4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+
+    /* Team Section */
+    .team-section {
+        padding: 80px 0;
+        background: white;
+    }
+
+    .team-card {
+        text-align: center;
+        padding: 30px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        transition: all 0.4s ease;
+    }
+
+    .team-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--card-shadow-hover);
+    }
+
+    .team-avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: white;
+        font-weight: 700;
+    }
+
+    .team-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+        color: #1a202c;
+    }
+
+    .team-role {
+        color: #667eea;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .team-description {
+        color: #718096;
+        line-height: 1.6;
+    }
+
+    .team-social {
+        margin-top: 20px;
+    }
+
+    .team-social a {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #f7fafc;
+        color: #667eea;
+        line-height: 40px;
+        margin: 0 5px;
+        transition: all 0.3s ease;
+    }
+
+    .team-social a:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        transform: translateY(-3px);
+    }
+
+    /* Timeline - FIXED VERSION */
+    .timeline-section {
+        padding: 80px 0;
+        background: linear-gradient(180deg, #f8f9ff 0%, #ffffff 100%);
+    }
+
+    .timeline {
+        position: relative;
+        padding: 0;
+        list-style: none;
+        margin: 0;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        transform: translateX(-50%);
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 50px;
+        width: 100%;
+        clear: both;
+        display: block;
+    }
+
+    .timeline-item::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+
+    .timeline-content {
+        width: 45%;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .timeline-content:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    /* Left side items (even) */
+    .timeline-item:nth-child(even) .timeline-content {
+        float: left;
+        text-align: right;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content::after {
+        content: '';
+        position: absolute;
+        right: -15px;
+        top: 30px;
+        width: 0;
+        height: 0;
+        border-left: 15px solid white;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+    }
+
+    /* Right side items (odd) */
+    .timeline-item:nth-child(odd) .timeline-content {
+        float: right;
+        text-align: left;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content::after {
+        content: '';
+        position: absolute;
+        left: -15px;
+        top: 30px;
+        width: 0;
+        height: 0;
+        border-right: 15px solid white;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+    }
+
+    .timeline-icon {
+        position: absolute;
+        left: 50%;
+        top: 20px;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        z-index: 2;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        border: 4px solid #f8f9ff;
+    }
+
+    .timeline-year {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #667eea;
+        margin-bottom: 10px;
+    }
+
+    .timeline-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #1a202c;
+    }
+
+    .timeline-description {
+        color: #718096;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Mobile Timeline */
+    @media (max-width: 768px) {
+        .timeline::before {
+            left: 30px;
+        }
+        
+        .timeline-content {
+            width: calc(100% - 90px) !important;
+            float: none !important;
+            margin-left: 80px;
+            text-align: left !important;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after,
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            left: -15px;
+            right: auto;
+            border-right: 15px solid white;
+            border-left: none;
+        }
+        
+        .timeline-icon {
+            left: 30px;
+            transform: translateX(-50%);
+            top: 20px;
+        }
+    }
+
+    /* Section Title Styles */
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #1a202c;
+        text-align: center;
+    }
+
+    .section-subtitle {
+        color: #718096;
+        text-align: center;
+        margin-bottom: 50px;
+        font-size: 1.1rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- About Hero -->
+<section class="about-hero">
+    <div class="container">
+        <h1>About Us</h1>
+        <p>
+            We're revolutionizing the insurance industry in Pakistan with cutting-edge technology 
+            and customer-centric solutions
+        </p>
+    </div>
+</section>
+
+<!-- Mission & Vision -->
+<section class="mission-vision">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="mv-card">
+                    <div class="mv-icon mission">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>
+                        To democratize insurance in Pakistan by leveraging artificial intelligence and 
+                        automation to make insurance accessible, affordable, and transparent for everyone. 
+                        We believe that every Pakistani deserves financial protection and peace of mind.
+                    </p>
+                    <p>
+                        Our mission is to eliminate the complexities of traditional insurance processes 
+                        and provide a seamless digital experience that empowers customers to make informed 
+                        decisions about their insurance needs.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="mv-card">
+                    <div class="mv-icon vision">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p>
+                        To become Pakistan's most trusted and innovative insurance technology platform, 
+                        setting new standards in customer service, transparency, and digital innovation 
+                        in the insurance sector.
+                    </p>
+                    <p>
+                        We envision a future where insurance is simple, instant, and personalized for 
+                        every individual and business. Through continuous innovation and technology 
+                        adoption, we aim to protect millions of Pakistani families and businesses.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values -->
+<section class="values-section">
+    <div class="container">
+        <h2 class="section-title">Our Core Values</h2>
+        <p class="section-subtitle">The principles that guide everything we do</p>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="value-card">
+                    <div class="value-icon v1">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Trust & Security</h4>
+                    <p>Your data and assets are protected with the highest security standards</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="value-card">
+                    <div class="value-icon v2">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4>Innovation</h4>
+                    <p>Constantly evolving with cutting-edge technology and AI solutions</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="value-card">
+                    <div class="value-icon v3">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4>Transparency</h4>
+                    <p>Clear, honest communication with no hidden fees or surprises</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="value-card">
+                    <div class="value-icon v4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Customer First</h4>
+                    <p>Your needs and satisfaction are at the heart of everything we do</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline - FIXED VERSION -->
+<section class="timeline-section">
+    <div class="container">
+        <h2 class="section-title">Our Journey</h2>
+        <p class="section-subtitle">Milestones in our mission to transform insurance</p>
+        
+        <ul class="timeline">
+            <li class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2022</div>
+                    <h4 class="timeline-title">Company Founded</h4>
+                    <p class="timeline-description">
+                        Started with a vision to revolutionize insurance in Pakistan using AI and automation
+                    </p>
+                </div>
+            </li>
+            
+            <li class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2023</div>
+                    <h4 class="timeline-title">AI Calculator Launched</h4>
+                    <p class="timeline-description">
+                        Introduced Pakistan's first AI-powered insurance premium calculator
+                    </p>
+                </div>
+            </li>
+            
+            <li class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2023</div>
+                    <h4 class="timeline-title">10,000+ Policies Sold</h4>
+                    <p class="timeline-description">
+                        Reached milestone of serving 10,000 satisfied customers across Pakistan
+                    </p>
+                </div>
+            </li>
+            
+            <li class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2024</div>
+                    <h4 class="timeline-title">Mobile Wallet Integration</h4>
+                    <p class="timeline-description">
+                        Integrated JazzCash and EasyPaisa for seamless digital payments
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- Team -->
+<section class="team-section">
+    <div class="container">
+        <h2 class="section-title">Meet Our Team</h2>
+        <p class="section-subtitle">The talented people behind our success</p>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card">
+                    <div class="team-avatar">AK</div>
+                    <h4 class="team-name">Ahmed Khan</h4>
+                    <div class="team-role">CEO & Founder</div>
+                    <p class="team-description">
+                        Visionary leader with 15+ years in insurance and fintech
+                    </p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card">
+                    <div class="team-avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">SN</div>
+                    <h4 class="team-name">Sara Nawaz</h4>
+                    <div class="team-role">CTO</div>
+                    <p class="team-description">
+                        AI expert specializing in machine learning and automation
+                    </p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card">
+                    <div class="team-avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">UA</div>
+                    <h4 class="team-name">Usman Ali</h4>
+                    <div class="team-role">Head of Operations</div>
+                    <p class="team-description">
+                        Operations specialist ensuring smooth customer experience
+                    </p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card">
+                    <div class="team-avatar" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">FH</div>
+                    <h4 class="team-name">Fatima Hassan</h4>
+                    <div class="team-role">Head of Customer Success</div>
+                    <p class="team-description">
+                        Dedicated to ensuring exceptional customer satisfaction
+                    </p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 0; color: white; text-align: center;">
+    <div class="container">
+        <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 20px;">Join Our Growing Family</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9;">
+            Be part of the insurance revolution in Pakistan
+        </p>
+        <a href="{% url 'register' %}" class="btn btn-hero-primary" style="background: white; color: #667eea; padding: 15px 40px; border-radius: 50px;">
+            <i class="fas fa-user-plus"></i> Get Started Today
+        </a>
+    </div>
+</section>
+{% endblock %}

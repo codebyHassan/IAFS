@@ -1,0 +1,230 @@
+{% extends 'calculator/base.html' %}
+
+{% block title %}Health Insurance Calculator{% endblock %}
+
+{% block extra_css %}
+<style>
+    .calculator-hero {
+        background: var(--primary-gradient);
+        padding: 80px 0 60px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .calculator-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.3;
+    }
+    
+    .calculator-hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        color: white;
+        position: relative;
+        text-align: center;
+        animation: fadeInDown 0.8s ease-out;
+    }
+    
+    .hero-icon {
+        width: 80px;
+        height: 80px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        backdrop-filter: blur(10px);
+        animation: bounceIn 1s ease-out;
+    }
+    
+    .hero-icon i {
+        font-size: 2.5rem;
+        color: white;
+    }
+    
+    .calculator-form {
+        background: white;
+        border-radius: 24px;
+        padding: 50px;
+        box-shadow: var(--card-shadow);
+        border: 1px solid rgba(102, 126, 234, 0.1);
+        margin-top: -50px;
+        position: relative;
+        animation: fadeInUp 0.8s ease-out;
+    }
+    
+    .calculator-form::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: var(--primary-gradient);
+        border-radius: 24px 24px 0 0;
+    }
+    
+    .form-label {
+        font-weight: 600;
+        color: #1a202c;
+        margin-bottom: 10px;
+        font-size: 0.95rem;
+    }
+    
+    .form-control, .form-select {
+        padding: 14px 18px;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        background: #f8fafc;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        border-color: #667eea;
+        background: white;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        transform: translateY(-2px);
+    }
+    
+    .form-check-input {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #667eea;
+        cursor: pointer;
+    }
+    
+    .form-check-input:checked {
+        background-color: #667eea;
+        border-color: #667eea;
+    }
+    
+    .btn-submit {
+        background: var(--primary-gradient);
+        border: none;
+        padding: 16px 50px;
+        border-radius: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        color: white;
+        width: 100%;
+        margin-top: 20px;
+    }
+    
+    .btn-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    .info-box {
+        background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        border-left: 4px solid #667eea;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+    }
+    
+    .info-box i {
+        color: #667eea;
+        font-size: 1.5rem;
+        margin-right: 15px;
+    }
+    
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes bounceIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        70% {
+            transform: scale(0.9);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="calculator-hero">
+    <div class="container">
+        <div class="hero-icon">
+            <i class="fas fa-heartbeat"></i>
+        </div>
+        <h1>Health Insurance Calculator</h1>
+    </div>
+</section>
+
+<div class="container" style="margin-top: 60px; margin-bottom: 80px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="info-box">
+                <i class="fas fa-info-circle"></i>
+                <strong>How it works:</strong> Our AI-powered calculator analyzes your health profile, lifestyle, and coverage needs to provide an accurate premium estimate instantly.
+            </div>
+            <br>
+            <form method="POST" class="calculator-form">
+                {% csrf_token %}
+                
+                <div class="row">
+                    {% for field in form %}
+                    <div class="col-md-6 mb-4">
+                        <label class="form-label">
+                            {{ field.label }}
+                            {% if field.field.required %}<span style="color: #ef4444;">*</span>{% endif %}
+                        </label>
+                        {{ field }}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <div class="text-danger small mt-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-calculator"></i> Calculate Premium
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

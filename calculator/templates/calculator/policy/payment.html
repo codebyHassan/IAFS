@@ -1,0 +1,287 @@
+{% extends 'calculator/base.html' %}
+
+{% block title %}Payment - PakInsure{% endblock %}
+
+{% block extra_css %}
+<style>
+    .payment-hero {
+        background: var(--primary-gradient);
+        padding: 60px 0;
+    }
+
+    .payment-card {
+        background: white;
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: var(--card-shadow);
+        margin-bottom: 30px;
+    }
+
+    .payment-method {
+        border: 2px solid #e2e8f0;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .payment-method:hover {
+        border-color: #667eea;
+        background: #667eea05;
+    }
+
+    .payment-method.active {
+        border-color: #667eea;
+        background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    }
+
+    .payment-method input[type="radio"] {
+        width: 20px;
+        height: 20px;
+        margin-right: 15px;
+    }
+
+    .payment-icon {
+        width: 50px;
+        height: 50px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        margin-right: 15px;
+        font-size: 1.5rem;
+    }
+
+    .payment-icon.stripe {
+        background: #635bff15;
+        color: #635bff;
+    }
+
+    .payment-icon.jazzcash {
+        background: #ff6b3515;
+        color: #ff6b35;
+    }
+
+    .payment-icon.easypaisa {
+        background: #10b98115;
+        color: #10b981;
+    }
+
+    .order-summary {
+        background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        border-radius: 15px;
+        padding: 25px;
+        position: sticky;
+        top: 20px;
+    }
+
+    .order-summary h5 {
+        color: #1a202c;
+        font-weight: 800;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #667eea;
+    }
+
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        color: #475569;
+    }
+
+    .summary-row.total {
+        border-top: 2px solid #667eea;
+        margin-top: 15px;
+        padding-top: 15px;
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #1a202c;
+    }
+
+    .btn-pay {
+        background: var(--primary-gradient);
+        color: white;
+        padding: 16px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: none;
+        width: 100%;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        margin-top: 20px;
+    }
+
+    .btn-pay:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        color: white;
+    }
+
+    .security-badge {
+        text-align: center;
+        padding: 15px;
+        background: white;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+
+    .security-badge i {
+        color: #10b981;
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .card-demo-info {
+        background: #fffbeb;
+        border-left: 4px solid #f59e0b;
+        padding: 15px;
+        border-radius: 10px;
+        margin: 15px 0;
+        font-size: 0.9rem;
+        color: #78350f;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="payment-hero">
+    <div class="container">
+        <h1 class="text-white text-center" style="font-weight: 800;">
+            <i class="fas fa-credit-card"></i> Secure Payment
+        </h1>
+        <p class="text-white text-center" style="font-size: 1.2rem; opacity: 0.9;">
+            Choose your preferred payment method
+        </p>
+    </div>
+</section>
+
+<div class="container" style="margin-top: 60px; margin-bottom: 80px;">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="payment-card">
+                <h4 style="color: #1a202c; font-weight: 800; margin-bottom: 30px;">
+                    <i class="fas fa-wallet"></i> Select Payment Method
+                </h4>
+
+                <form method="POST" id="paymentForm">
+                    {% csrf_token %}
+
+                    <!-- Stripe -->
+                    <label class="payment-method" for="stripe">
+                        <input type="radio" name="payment_method" value="stripe" id="stripe" checked>
+                        <span class="payment-icon stripe">
+                            <i class="fab fa-cc-stripe"></i>
+                        </span>
+                        <strong>Credit/Debit Card (Stripe)</strong>
+                        <p class="mb-0" style="font-size: 0.9rem; color: #64748b; margin-left: 85px;">
+                            Pay securely with your credit or debit card
+                        </p>
+                    </label>
+
+                    <!-- JazzCash -->
+                    <label class="payment-method" for="jazzcash">
+                        <input type="radio" name="payment_method" value="jazzcash" id="jazzcash">
+                        <span class="payment-icon jazzcash">
+                            <i class="fas fa-mobile-alt"></i>
+                        </span>
+                        <strong>JazzCash</strong>
+                        <p class="mb-0" style="font-size: 0.9rem; color: #64748b; margin-left: 85px;">
+                            Pay using your JazzCash mobile wallet
+                        </p>
+                    </label>
+
+                    <!-- EasyPaisa -->
+                    <label class="payment-method" for="easypaisa">
+                        <input type="radio" name="payment_method" value="easypaisa" id="easypaisa">
+                        <span class="payment-icon easypaisa">
+                            <i class="fas fa-wallet"></i>
+                        </span>
+                        <strong>EasyPaisa</strong>
+                        <p class="mb-0" style="font-size: 0.9rem; color: #64748b; margin-left: 85px;">
+                            Pay using your EasyPaisa account
+                        </p>
+                    </label>
+
+                    <!-- Demo Notice -->
+                    <div class="card-demo-info">
+                        <strong><i class="fas fa-info-circle"></i> Demo Mode:</strong>
+                        This is a demo payment gateway. No actual payment will be processed. Click "Pay Now" to simulate payment.
+                    </div>
+
+                    <button type="submit" class="btn-pay">
+                        <i class="fas fa-lock"></i> Pay PKR {{ policy.yearly_premium|floatformat:0 }} Now
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h5><i class="fas fa-receipt"></i> Order Summary</h5>
+
+                <div class="summary-row">
+                    <span>Policy Type</span>
+                    <strong>{{ policy.get_insurance_type_display }}</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Policy Number</span>
+                    <strong>{{ policy.policy_number }}</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Coverage</span>
+                    <strong>PKR {{ policy.coverage_amount|floatformat:0 }}</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Duration</span>
+                    <strong>1 Year</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Monthly Premium</span>
+                    <strong>PKR {{ policy.monthly_premium|floatformat:0 }}</strong>
+                </div>
+
+                <div class="summary-row total">
+                    <span>Total Amount</span>
+                    <span style="background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        PKR {{ policy.yearly_premium|floatformat:0 }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Security Badge -->
+            <div class="security-badge">
+                <i class="fas fa-shield-alt"></i>
+                <h6 style="color: #1a202c; font-weight: 700; margin: 10px 0 5px 0;">
+                    100% Secure Payment
+                </h6>
+                <p style="color: #64748b; font-size: 0.85rem; margin: 0;">
+                    Your payment information is encrypted and secure
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Add active class to selected payment method
+    document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.classList.remove('active');
+            });
+            this.closest('.payment-method').classList.add('active');
+        });
+    });
+
+    // Set initial active state
+    document.querySelector('input[name="payment_method"]:checked').closest('.payment-method').classList.add('active');
+</script>
+{% endblock %}

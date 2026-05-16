@@ -1,0 +1,24 @@
+{% extends 'calculator/base2.html' %}
+{% load static %}
+
+{% block title %}{{ blog.title }} - Blog{% endblock %}
+
+{% block content %}
+<section class="blog-hero">
+    <div class="container">
+        <h1>{{ blog.title }}</h1>
+        <p>{{ blog.get_category_display }} | {{ blog.created_at|date:"F d, Y" }}</p>
+    </div>
+</section>
+
+<section class="blog-section">
+    <div class="container" style="max-width: 800px;">
+        {% if blog.image %}
+            <img src="{{ blog.image.url }}" alt="{{ blog.title }}" style="width: 100%; border-radius: 15px; margin-bottom: 30px;">
+        {% endif %}
+        <p style="color: #718096; font-size: 1.1rem; line-height: 1.8;">
+            {{ blog.content|linebreaks }}
+        </p>
+    </div>
+</section>
+{% endblock %}

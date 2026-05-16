@@ -1,0 +1,176 @@
+{% extends 'calculator/base.html' %}
+
+{% block title %}Login - Insurance Automation & Faciltion System {% endblock %}
+
+{% block extra_css %}
+<style>
+    .auth-hero {
+        background: var(--primary-gradient);
+        padding: 60px 0 100px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .auth-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.3;
+    }
+
+    .auth-card {
+        background: white;
+        border-radius: 24px;
+        padding: 50px;
+        box-shadow: var(--card-shadow);
+        margin-top: -50px;
+        position: relative;
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .auth-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: var(--primary-gradient);
+        border-radius: 24px 24px 0 0;
+    }
+
+    .auth-icon {
+        width: 80px;
+        height: 80px;
+        background: var(--primary-gradient);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 30px;
+        animation: bounceIn 1s ease-out;
+    }
+
+    .auth-icon i {
+        font-size: 2.5rem;
+        color: white;
+    }
+
+    .form-control {
+        padding: 14px 18px;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        background: #f8fafc;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #667eea;
+        background: white;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .btn-login {
+        background: var(--primary-gradient);
+        border: none;
+        padding: 16px;
+        border-radius: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        color: white;
+        width: 100%;
+    }
+
+    .btn-login:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        color:rgba(69, 98, 223, 0.4);
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounceIn {
+        0% { opacity: 0; transform: scale(0.3); }
+        50% { transform: scale(1.05); }
+        70% { transform: scale(0.9); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="auth-hero">
+    <div class="container">
+        <h1 class="text-center text-white" style="font-size: 2.5rem; font-weight: 800;">Welcome Back!</h1>
+        <p class="text-center text-white" style="font-size: 1.2rem; opacity: 0.9;">Login to manage your insurance policies</p>
+    </div>
+</section>
+
+<div class="container" style="margin-top: 60px; margin-bottom: 80px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+            <div class="auth-card">
+                <div class="auth-icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+
+                <h3 class="text-center mb-4" style="color: #1a202c; font-weight: 700;">Sign In</h3>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label" style="font-weight: 600; color: #1a202c;">Username</label>
+                        {{ form.username }}
+                        {% if form.username.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ form.username.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" style="font-weight: 600; color: #1a202c;">Password</label>
+                        {{ form.password }}
+                        {% if form.password.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ form.password.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ form.non_field_errors }}
+                    </div>
+                    {% endif %}
+
+                    <button type="submit" class="btn btn-login">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+
+                <div class="text-center mt-4">
+                    <p style="color: #64748b;">Don't have an account? 
+                        <a href="{% url 'register' %}" style="color: #667eea; font-weight: 600; text-decoration: none;">
+                            Register Now
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,329 @@
+{% extends 'calculator/base.html' %}
+
+{% block title %}My Policies - PakInsure{% endblock %}
+
+{% block extra_css %}
+<style>
+    .policies-hero {
+        background: var(--primary-gradient);
+        padding: 60px 0;
+    }
+
+    .filter-bar {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+    }
+
+    .policy-card {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: var(--card-shadow);
+        margin-bottom: 25px;
+        transition: all 0.3s ease;
+        border-left: 6px solid;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .policy-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -50px;
+        width: 150px;
+        height: 150px;
+        background: var(--primary-gradient);
+        opacity: 0.05;
+        border-radius: 50%;
+    }
+
+    .policy-card.health {
+        border-color: #ef4444;
+    }
+
+    .policy-card.life {
+        border-color: #3b82f6;
+    }
+
+    .policy-card.property {
+        border-color: #10b981;
+    }
+
+    .policy-card.vehicle {
+        border-color: #f59e0b;
+    }
+
+    .policy-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--card-shadow-hover);
+    }
+
+    .policy-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .policy-icon.health {
+        background: #ef444415;
+        color: #ef4444;
+    }
+
+    .policy-icon.life {
+        background: #3b82f615;
+        color: #3b82f6;
+    }
+
+    .policy-icon.property {
+        background: #10b98115;
+        color: #10b981;
+    }
+
+    .policy-icon.vehicle {
+        background: #f59e0b15;
+        color: #f59e0b;
+    }
+
+    .badge-status {
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .badge-active {
+        background: #10b98120;
+        color: #10b981;
+    }
+
+    .badge-pending {
+        background: #f59e0b20;
+        color: #f59e0b;
+    }
+
+    .badge-expired {
+        background: #ef444420;
+        color: #ef4444;
+    }
+
+    .badge-cancelled {
+        background: #64748b20;
+        color: #64748b;
+    }
+
+    .policy-detail {
+        margin: 15px 0;
+    }
+
+    .policy-detail-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .policy-detail-item:last-child {
+        border-bottom: none;
+    }
+
+    .detail-label {
+        color: #64748b;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .detail-value {
+        color: #1a202c;
+        font-weight: 700;
+    }
+
+    .btn-action {
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-right: 10px;
+        font-size: 0.9rem;
+    }
+
+    .btn-view {
+        background: var(--primary-gradient);
+        color: white;
+        border: none;
+    }
+
+    .btn-view:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        color: white;
+    }
+
+    .btn-claim {
+        background: white;
+        color: #667eea;
+        border: 2px solid #667eea;
+    }
+
+    .btn-claim:hover {
+        background: #667eea;
+        color: white;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .empty-state i {
+        font-size: 5rem;
+        color: #e2e8f0;
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="policies-hero">
+    <div class="container">
+        <h1 class="text-white" style="font-weight: 800;">
+            <i class="fas fa-file-contract"></i> My Insurance Policies
+        </h1>
+        <p class="text-white" style="font-size: 1.2rem; opacity: 0.9;">
+            View and manage all your insurance policies
+        </p>
+    </div>
+</section>
+
+<div class="container" style="margin-top: 40px; margin-bottom: 80px;">
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h5 style="margin: 0; color: #1a202c;">
+                    <i class="fas fa-filter"></i> Filter by Status:
+                </h5>
+            </div>
+            <div class="col-md-4 text-end">
+                <a href="{% url 'my_policies' %}" class="btn btn-sm btn-outline-secondary">All</a>
+                <a href="?status=active" class="btn btn-sm btn-outline-success">Active</a>
+                <a href="?status=pending" class="btn btn-sm btn-outline-warning">Pending</a>
+                <a href="?status=expired" class="btn btn-sm btn-outline-danger">Expired</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Policies List -->
+    {% if policies %}
+        {% for policy in policies %}
+        <div class="policy-card {{ policy.insurance_type }}">
+            <div class="row">
+                <div class="col-md-2 text-center">
+                    <div class="policy-icon {{ policy.insurance_type }}">
+                        <i class="fas fa-{% if policy.insurance_type == 'health' %}heartbeat{% elif policy.insurance_type == 'life' %}user-shield{% elif policy.insurance_type == 'property' %}home{% else %}car{% endif %}"></i>
+                    </div>
+                </div>
+
+                <div class="col-md-10">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h4 style="color: #1a202c; font-weight: 800; margin-bottom: 5px;">
+                                {{ policy.get_insurance_type_display }}
+                            </h4>
+                            <p style="color: #64748b; margin: 0;">
+                                Policy Number: <strong>{{ policy.policy_number }}</strong>
+                            </p>
+                        </div>
+                        <span class="badge-status badge-{{ policy.status }}">
+                            {{ policy.get_status_display }}
+                        </span>
+                    </div>
+
+                    <div class="policy-detail">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="policy-detail-item">
+                                    <span class="detail-label">Monthly Premium</span>
+                                    <span class="detail-value">PKR {{ policy.monthly_premium|floatformat:0 }}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="policy-detail-item">
+                                    <span class="detail-label">Yearly Premium</span>
+                                    <span class="detail-value">PKR {{ policy.yearly_premium|floatformat:0 }}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="policy-detail-item">
+                                    <span class="detail-label">Coverage Amount</span>
+                                    <span class="detail-value">PKR {{ policy.coverage_amount|floatformat:0 }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-md-4">
+                                <div class="policy-detail-item">
+                                    <span class="detail-label">Start Date</span>
+                                    <span class="detail-value">{{ policy.start_date|date:"M d, Y" }}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="policy-detail-item">
+                                    <span class="detail-label">End Date</span>
+                                    <span class="detail-value">{{ policy.end_date|date:"M d, Y" }}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="policy-detail-item">
+                                    <span class="detail-label">Days Remaining</span>
+                                    <span class="detail-value">
+                                        {% if policy.is_active %}
+                                            {{ policy.days_remaining }} days
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <a href="{% url 'policy_detail' policy.id %}" class="btn btn-action btn-view">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                        {% if policy.status == 'active' %}
+                        <a href="{% url 'submit_claim' policy.id %}" class="btn btn-action btn-claim">
+                            <i class="fas fa-file-medical"></i> Submit Claim
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <i class="fas fa-folder-open"></i>
+            <h3 style="color: #64748b;">No Policies Found</h3>
+            <p style="color: #94a3b8; margin-bottom: 30px;">
+                You don't have any insurance policies yet. Get started by calculating a premium!
+            </p>
+            <a href="{% url 'home' %}" class="btn btn-action btn-view">
+                <i class="fas fa-calculator"></i> Calculate Premium Now
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,305 @@
+{% extends 'calculator/base.html' %}
+
+{% block title %}Home - Insurance Premium Calculator{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero {
+        background: var(--primary-gradient);
+        padding: 100px 0 80px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.3;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: white;
+        margin-bottom: 1.5rem;
+        letter-spacing: -1px;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 0.8s ease-out;
+    }
+    
+    .hero p {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s ease-out;
+    }
+    
+    .insurance-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: var(--card-shadow);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: 1px solid rgba(102, 126, 234, 0.1);
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .insurance-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--primary-gradient);
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+    }
+    
+    .insurance-card:hover {
+        transform: translateY(-15px);
+        box-shadow: var(--card-shadow-hover);
+    }
+    
+    .insurance-card:hover::before {
+        transform: scaleX(1);
+    }
+    
+    .insurance-icon {
+        width: 90px;
+        height: 90px;
+        margin: 0 auto 25px;
+        background: var(--primary-gradient);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s ease;
+    }
+    
+    .insurance-card:hover .insurance-icon {
+        transform: rotateY(360deg);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    }
+    
+    .insurance-icon i {
+        font-size: 2.5rem;
+        color: white;
+    }
+    
+    .insurance-card h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1a202c;
+        margin-bottom: 15px;
+    }
+    
+    .insurance-card p {
+        color: #64748b;
+        margin-bottom: 25px;
+        line-height: 1.7;
+    }
+    
+    .btn-calculate {
+        background: var(--primary-gradient);
+        border: none;
+        padding: 12px 35px;
+        border-radius: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .btn-calculate:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        color: white;
+    }
+    
+    .stats-section {
+        padding: 60px 0;
+        background: white;
+    }
+    
+    .stat-card {
+        text-align: center;
+        padding: 30px;
+        border-radius: 15px;
+        background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        border: 2px solid #667eea20;
+    }
+    
+    .stat-number {
+        font-size: 3rem;
+        font-weight: 800;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .stat-label {
+        color: #64748b;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+    
+    .features-section {
+        padding: 80px 0;
+    }
+    
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #1a202c;
+        margin-bottom: 60px;
+    }
+    
+    .section-title span {
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2rem;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container hero-content">
+        <div class="row align-items-center">
+            <div class="col-lg-12 text-center">
+                <h1>Calculate Your Insurance Premium Instantly</h1>
+                <p>AI-Powered Premium Calculator for Pakistan - Get accurate quotes in seconds!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <div class="stat-card">
+                    <div class="stat-number">{{ total_calculations|default:"0" }}</div>
+                    <div class="stat-label">Total Calculations</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Insurance Types</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Pakistani Cities</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="stat-card">
+                    <div class="stat-number">AI</div>
+                    <div class="stat-label">ML Powered</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Insurance Calculators Section -->
+<section class="features-section">
+    <div class="container">
+        <h2 class="section-title">Choose Your <span>Insurance Type</span></h2>
+        
+        <div class="row">
+            <!-- Health Insurance -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="insurance-card">
+                    <div class="insurance-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Health Insurance</h3>
+                    <p>Calculate premiums based on age, BMI, medical history, and coverage needs.</p>
+                    <a href="{% url 'health_calculator' %}" class="btn-calculate">
+                        <i class="fas fa-calculator"></i> Calculate
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Life Insurance -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="insurance-card">
+                    <div class="insurance-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Life Insurance</h3>
+                    <p>Get quotes for term life and endowment plans tailored to your needs.</p>
+                    <a href="{% url 'life_calculator' %}" class="btn-calculate">
+                        <i class="fas fa-calculator"></i> Calculate
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Property Insurance -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="insurance-card">
+                    <div class="insurance-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Property Insurance</h3>
+                    <p>Protect your property from fire, theft, and natural disasters.</p>
+                    <a href="{% url 'property_calculator' %}" class="btn-calculate">
+                        <i class="fas fa-calculator"></i> Calculate
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Vehicle Insurance -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="insurance-card">
+                    <div class="insurance-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Vehicle Insurance</h3>
+                    <p>Comprehensive coverage for cars, bikes, and commercial vehicles.</p>
+                    <a href="{% url 'vehicle_calculator' %}" class="btn-calculate">
+                        <i class="fas fa-calculator"></i> Calculate
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

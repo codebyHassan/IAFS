@@ -1,0 +1,483 @@
+{% extends 'calculator/base.html' %}
+
+{% block title %}Vehicle Insurance Calculator{% endblock %}
+
+{% block extra_css %}
+<style>
+    .calculator-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 80px 0 60px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .calculator-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.3;
+    }
+    
+    .calculator-hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #ffffff;
+        position: relative;
+        text-align: center;
+        animation: fadeInDown 0.8s ease-out;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .calculator-hero p {
+        color: rgba(255, 255, 255, 0.95);
+        text-align: center;
+        font-size: 1.2rem;
+        margin-top: 15px;
+        position: relative;
+        animation: fadeInDown 1s ease-out;
+    }
+    
+    .hero-icon {
+        width: 80px;
+        height: 80px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        backdrop-filter: blur(10px);
+        animation: bounceIn 1s ease-out;
+    }
+    
+    .hero-icon i {
+        font-size: 2.5rem;
+        color: #ffffff;
+    }
+    
+    .calculator-form {
+        background: #ffffff;
+        border-radius: 24px;
+        padding: 50px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(102, 126, 234, 0.1);
+        margin-top: -50px;
+        position: relative;
+        animation: fadeInUp 0.8s ease-out;
+    }
+    
+    .calculator-form::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 24px 24px 0 0;
+    }
+    
+    .form-label {
+        font-weight: 600;
+        color: #1a202c;
+        margin-bottom: 10px;
+        font-size: 0.95rem;
+        letter-spacing: 0.3px;
+    }
+    
+    .form-control, .form-select {
+        padding: 14px 18px;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        background: #f8fafc;
+        font-size: 1rem;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        outline: none;
+        border-color: #667eea;
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        transform: translateY(-2px);
+    }
+    
+    .btn-submit {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 16px 50px;
+        border-radius: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        color: #ffffff;
+        width: 100%;
+        margin-top: 20px;
+        font-size: 1rem;
+    }
+    
+    .btn-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        color: #ffffff;
+    }
+    
+    .info-box {
+        background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        border-left: 4px solid #667eea;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        animation: fadeIn 1s ease-out;
+    }
+    
+    .info-box i {
+        color: #667eea;
+        font-size: 1.5rem;
+        margin-right: 15px;
+        vertical-align: middle;
+    }
+
+    .info-box strong {
+        color: #1a202c;
+    }
+
+    .info-box p {
+        margin: 10px 0 0 0;
+        color: #475569;
+        line-height: 1.6;
+    }
+
+    .insurance-types {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 30px;
+        border: 2px solid #e2e8f0;
+    }
+
+    .insurance-types h5 {
+        color: #1a202c;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .type-card {
+        background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-left: 4px solid #667eea;
+        transition: all 0.3s ease;
+    }
+
+    .type-card:hover {
+        transform: translateX(5px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+    }
+
+    .type-card h6 {
+        color: #1a202c;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .type-card p {
+        color: #64748b;
+        margin: 0;
+        font-size: 0.9rem;
+    }
+
+    .section-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+    }
+
+    .section-header i {
+        margin-right: 10px;
+    }
+
+    .tips-box {
+        background: #fffbeb;
+        border-left: 4px solid #f59e0b;
+        padding: 20px;
+        border-radius: 12px;
+        margin-top: 30px;
+    }
+
+    .tips-box h6 {
+        color: #92400e;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .tips-box ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    .tips-box li {
+        color: #78350f;
+        margin-bottom: 8px;
+    }
+    
+    /* Animations */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes bounceIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        70% {
+            transform: scale(0.9);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+        .calculator-hero h1 {
+            font-size: 2rem;
+        }
+
+        .calculator-form {
+            padding: 30px 20px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="calculator-hero">
+    <div class="container">
+        <div class="hero-icon">
+            <i class="fas fa-car"></i>
+        </div>
+        <h1>Vehicle Insurance Calculator</h1>
+        <p>Comprehensive coverage for your car, bike, or commercial vehicle</p>
+    </div>
+</section>
+
+<div class="container" style="margin-top: 60px; margin-bottom: 80px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Info Box -->
+            <div class="info-box">
+                <i class="fas fa-car-crash"></i>
+                <strong>Smart Vehicle Insurance:</strong>
+                <p>Our advanced calculator considers vehicle type, age, driver profile, location, and claim history to provide you with the most competitive premium rates. Protect yourself from accidents, theft, and third-party liabilities.</p>
+            </div>
+
+            <!-- Insurance Types -->
+            <div class="insurance-types">
+                <h5><i class="fas fa-list-check"></i> Coverage Options</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="type-card">
+                            <h6><i class="fas fa-shield-halved"></i> Third Party Only</h6>
+                            <p>Legal minimum coverage - covers damage to others</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="type-card">
+                            <h6><i class="fas fa-shield-alt"></i> Comprehensive</h6>
+                            <p>Full protection including own damage & theft</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <!-- Calculator Form -->
+            <form method="POST" class="calculator-form">
+                {% csrf_token %}
+                
+                <!-- Vehicle Information -->
+                <div class="section-header">
+                    <h4 style="margin: 0;"><i class="fas fa-car-side"></i> Vehicle Information</h4>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label class="form-label">
+                            {{ form.vehicle_value.label }}
+                            <span style="color: #ef4444;">*</span>
+                        </label>
+                        {{ form.vehicle_value }}
+                        {% if form.vehicle_value.errors %}
+                            {% for error in form.vehicle_value.errors %}
+                                <div class="text-danger small mt-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <small class="form-text text-muted d-block mt-1">
+                            <i class="fas fa-info-circle"></i> Current market value of your vehicle
+                        </small>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <label class="form-label">
+                            {{ form.vehicle_type.label }}
+                            <span style="color: #ef4444;">*</span>
+                        </label>
+                        {{ form.vehicle_type }}
+                        {% if form.vehicle_type.errors %}
+                            {% for error in form.vehicle_type.errors %}
+                                <div class="text-danger small mt-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <label class="form-label">
+                            {{ form.vehicle_age.label }}
+                            <span style="color: #ef4444;">*</span>
+                        </label>
+                        {{ form.vehicle_age }}
+                        {% if form.vehicle_age.errors %}
+                            {% for error in form.vehicle_age.errors %}
+                                <div class="text-danger small mt-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <small class="form-text text-muted d-block mt-1">
+                            <i class="fas fa-info-circle"></i> Model year affects premium
+                        </small>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <label class="form-label">
+                            {{ form.city.label }}
+                            <span style="color: #ef4444;">*</span>
+                        </label>
+                        {{ form.city }}
+                        {% if form.city.errors %}
+                            {% for error in form.city.errors %}
+                                <div class="text-danger small mt-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Driver Information -->
+                <div class="section-header" style="margin-top: 30px;">
+                    <h4 style="margin: 0;"><i class="fas fa-user"></i> Driver Information</h4>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <label class="form-label">
+                            {{ form.driver_age.label }}
+                            <span style="color: #ef4444;">*</span>
+                        </label>
+                        {{ form.driver_age }}
+                        {% if form.driver_age.errors %}
+                            {% for error in form.driver_age.errors %}
+                                <div class="text-danger small mt-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <label class="form-label">
+                            {{ form.driver_experience.label }}
+                            <span style="color: #ef4444;">*</span>
+                        </label>
+                        {{ form.driver_experience }}
+                        {% if form.driver_experience.errors %}
+                            {% for error in form.driver_experience.errors %}
+                                <div class="text-danger small mt-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <small class="form-text text-muted d-block mt-1">
+                            <i class="fas fa-award"></i> More experience = Lower premium
+                        </small>
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <label class="form-label">
+                            {{ form.claims_history.label }}
+                            <span style="color: #ef4444;">*</span>
+                        </label>
+                        {{ form.claims_history }}
+                        {% if form.claims_history.errors %}
+                            {% for error in form.claims_history.errors %}
+                                <div class="text-danger small mt-1">
+                                    <i class="fas fa-exclamation-circle"></i> {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <small class="form-text text-muted d-block mt-1">
+                            <i class="fas fa-history"></i> Last 5 years
+                        </small>
+                    </div>
+                </div>
+
+                <!-- Tips Box -->
+                <div class="tips-box">
+                    <h6><i class="fas fa-lightbulb"></i> Tips to Lower Your Premium:</h6>
+                    <ul>
+                        <li>Install GPS tracking and anti-theft devices</li>
+                        <li>Maintain a clean driving record with no claims</li>
+                        <li>Choose higher voluntary deductibles</li>
+                        <li>Renew policy before expiry for no-claim bonus</li>
+                    </ul>
+                </div>
+                
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-calculator"></i> Calculate Premium
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
