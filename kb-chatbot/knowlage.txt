@@ -1,0 +1,247 @@
+[
+  {
+    "id": 0,
+    "question": "Is Disability Insurance Required By Law?",
+    "answer": "Generally, **Disability Insurance** is not required by federal law. However, five states currently mandate most employers carry **short-term disability insurance** (SDI) for their employees: **California, Hawaii, New Jersey, New York, and Rhode Island**."
+  },
+  {
+    "id": 1,
+    "question": "Can Creditors Take Life Insurance After Death?",
+    "answer": "If the deceased policyholder had debt, creditors generally **cannot** take the **life insurance proceeds** provided the beneficiary is a **person** (an individual, not the estate). The proceeds belong to the beneficiary and are usually protected from the policyholder's creditors."
+  },
+  {
+    "id": 2,
+    "question": "Can I purchase Renters Insurance through major carriers?",
+    "answer": "Yes, **Renters Insurance** is widely available through nearly all major and regional insurance carriers."
+  },
+  {
+    "id": 3,
+    "question": "Can I Drive A New Car Home Without Insurance?",
+    "answer": "It is **never recommended** to drive a car without insurance, and most auto dealerships will require **proof of insurance** before you drive the vehicle off the lot, especially if there is a loan. If you traded in a car, the coverage on the older car may extend to the new car temporarily (grace period), but you must notify your insurance provider immediately to update the policy."
+  },
+  {
+    "id": 4,
+    "question": "Is The Cash Surrender Value Of Life Insurance Taxable?",
+    "answer": "The **Cash Surrender Value** is found in **Whole Life Insurance** (not Term) and is the amount you receive when terminating the policy. Only the **profit** portion (the amount exceeding the premiums paid, or the **basis**) is generally considered **taxable** as ordinary income. A non-taxable alternative to surrendering the policy is taking a **policy loan** against the cash value."
+  },
+  {
+    "id": 5,
+    "question": "How Is Annuity Income Reported?",
+    "answer": "**Annuity income** is reported by the issuing insurance company using the appropriate tax documentation (e.g., 1099-R). For **non-qualified annuities**, withdrawals are taxed as **ordinary income** (interest first) until the original premium basis is reached, which is then recovered tax-free. If annuitized (paid in installments), an **exclusion ratio** determines the taxable portion of each payment. **Qualified annuities** (held in retirement plans like 401(k)s or IRAs) are generally taxed as ordinary income upon withdrawal. Annuity taxation can be complex, particularly with transfers and ownership by non-natural persons (like trusts)."
+  },
+  {
+    "id": 6,
+    "question": "What Does Home Insurance Cover?",
+    "answer": "**Home Insurance** policies from major carriers cover a wide variety of claims, typically including **fire, theft, vandalism, wind, and lightning**. Coverage details vary based on the specific policy type (e.g., HO-3, HO-5), so reviewing your policy documents is essential to understand all benefits and exclusions."
+  },
+  {
+    "id": 7,
+    "question": "What Is A SIMPLE Retirement Plan?",
+    "answer": "A **SIMPLE** (Savings Incentive Match Plan for Employees) retirement plan is an **inexpensive, IRS-approved retirement plan** specifically designed for **small businesses**. It's favored because it has fewer steps, avoids complex testing, and reduces record-keeping requirements compared to larger plans."
+  },
+  {
+    "id": 8,
+    "question": "What Does Social Security Disability Insurance Cover?",
+    "answer": "**Social Security Disability Insurance (SSDI)** pays a **monthly cash benefit** to individuals who cannot work due to a **qualifying disability** (injury or illness). The benefit is paid directly to the recipient to be used as they wish."
+  },
+  {
+    "id": 9,
+    "question": "Is Car Insurance Prepaid?",
+    "answer": "Yes, **automobile insurance** is typically paid in advance (prepaid). The initial payment amount for new coverage is set by the carrier. Most carriers offer clients the option to pay monthly, quarterly, semi-annually, or annually. Paying in full (semi-annually or annually) may qualify the insured for a **discount**."
+  },
+  {
+    "id": 10,
+    "question": "What Does Medicare Part B Cover?",
+    "answer": "**Medicare Part B** (Medical Insurance) covers **doctor services, outpatient hospital services, medical services, and supplies**. It generally requires a **monthly premium**, an annual **deductible**, and a **20% copayment** for covered services. The recipient is responsible for all costs of services and supplies not covered by Medicare."
+  },
+  {
+    "id": 11,
+    "question": "Can Veterans Get Life Insurance?",
+    "answer": "If a service member does not enroll in **Veterans Group Life Insurance (VGLI)** within one year and 120 days of separating from service, their Servicemembers Group Life Insurance (SGLI) will end. They would then need to secure a **private life insurance policy**."
+  },
+  {
+    "id": 12,
+    "question": "Does My Homeowners Insurance Cover Lost Wedding Ring?",
+    "answer": "Generally, standard **Homeowners' Insurance** policies **do not cover lost items** (referred to as \"Mysterious Disappearance\"), as it is often a specific exclusion. Coverage for such an item can be obtained by adding a **scheduled personal property endorsement** (rider or floater) to the policy, often called a **Personal Inland Marine** policy. This usually requires a current appraisal and provides broader coverage."
+  },
+  {
+    "id": 13,
+    "question": "How Does Assigned Risk Auto Insurance Work?",
+    "answer": "**Assigned Risk Auto Insurance** plans are mechanisms, often state-regulated, to connect individuals who have difficulty obtaining standard auto insurance (due to poor driving history, etc.) with an insurance company that is required to insure them. **Assigned Risk** is not an insurance company itself, but a pool or processing center. Insurance companies are mandated by law to participate in these plans proportional to their market share."
+  },
+  {
+    "id": 14,
+    "question": "Can My Boyfriend Add Me To His Car Insurance?",
+    "answer": "If you are living in the **same household**, the policyholder should typically add you to the list of drivers, as the policy covers the vehicle and is linked to the household. If you are **not living together**, adding you to the policy usually isn't necessary for coverage."
+  },
+  {
+    "id": 15,
+    "question": "Do I Need A Police Report To Submit A Claim For A Car Accident On Private Property?",
+    "answer": "While the local police may or may not prepare an accident report for an incident on **private property** (as they often take no formal action), you **should still report the claim** to your insurance company. It is critical to exchange information with the other party and take photos for your records and the insurer's claims process."
+  },
+  {
+    "id": 16,
+    "question": "Does Full Coverage Auto Insurance Cover Repairs?",
+    "answer": "Assuming \"**Full Coverage**\" refers to carrying **Comprehensive and Collision coverage**, the policy will pay for repairs if there is a **covered claim** (e.g., accident, theft, hitting a deer). The repair cost is subject to your policy's **deductible**. Insurance does **not** cover general vehicle issues, wear and tear, or mechanical failures (like engine or transmission problems)."
+  },
+  {
+    "id": 17,
+    "question": "Is Life Insurance Acceptable In Islam?",
+    "answer": "Due to the use of elements like **interest (riba)** and **chance/uncertainty (gharar)**, there is debate among Islamic scholars regarding the permissibility of conventional insurance (i.e., whether it is **haram**). Individuals seeking guidance on this matter should consult a qualified **Imam** or Islamic scholar."
+  },
+  {
+    "id": 18,
+    "question": "Will Health Insurance Cover A Tubal Reversal?",
+    "answer": "Most health insurance plans generally **do not cover** the reversal of a **voluntary sterilization** or most treatments designed to overcome infertility. While some states mandate infertility coverage, these mandates often **specifically exclude reversal surgeries**."
+  },
+  {
+    "id": 19,
+    "question": "How Much Life Insurance Can You Get If You Have Been Diagnosed With Breast Cancer?",
+    "answer": "The amount of life insurance an individual can obtain is typically based on a multiple of their income (e.g., 20-30x). A breast cancer diagnosis primarily affects the **risk classification** and thus the **premium** for the coverage. Underwriting is based on details such as the diagnosis date, stage, treatment, and remission status. If cancer is current, **guaranteed-issue whole life (GIWL)** may be the only option, which offers limited coverage amounts (e.g., $20,000-$25,000) and usually includes a **graded period** (2-3 years) where only accidental death is covered, or premiums are returned if death occurs naturally."
+  },
+  {
+    "id": 20,
+    "question": "What Do I Need To Register For Medicare?",
+    "answer": "If you have paid sufficient taxes into the system, enrollment in **Medicare** is often **automatic**. You should receive your Medicare card and information packet shortly before you turn **65** or qualify due to disability. If you do not receive it, contact the Social Security office or 1-800-MEDICARE."
+  },
+  {
+    "id": 21,
+    "question": "Does Short Term Disability Insurance Work?",
+    "answer": "**Short-term Disability Insurance (STD)** works by paying a benefit if you have a **qualifying disability**. The effectiveness of the coverage depends critically on the policy's **definition of disability** and **occupation**. Definitions vary by company, and a vague definition can lead to a denial or a lower benefit payment."
+  },
+  {
+    "id": 22,
+    "question": "Will Homeowners Insurance Cover Pool?",
+    "answer": "Yes, **Homeowners Insurance** typically covers both **property damage** to the pool structure itself and **liability coverage** if someone is injured while using the pool. Property damage is covered against standard causes of loss, but **wear and tear** (e.g., liner rips 'just because', foundation cracks) is **not covered**. Carriers are often cautious about underwriting homes with pools, and it is strongly recommended to consider **higher liability limits** and potentially an **Umbrella Policy**."
+  },
+  {
+    "id": 23,
+    "question": "When Do I Have To Sign Up For Medicare?",
+    "answer": "Your **Initial Enrollment Period** for Medicare begins three months before your **65th birthday** month, includes your birthday month, and ends three months after your birthday month. If you miss this window, you can typically enroll during the **General Enrollment Period** between January 1 and March 31 each year, with coverage starting July 1."
+  },
+  {
+    "id": 24,
+    "question": "Will An MIP Affect My Car Insurance?",
+    "answer": "If you are the minor with the **Minor in Possession (MIP)** charge, it **will likely affect your car insurance** premiums and eligibility, as it signals increased risk to the insurer. Insurance companies assess risk based on violations and driving history."
+  },
+  {
+    "id": 25,
+    "question": "Do Health Insurance Providers Offer Life Insurance?",
+    "answer": "While many companies that are known for providing **health insurance** also offer **life insurance** programs, it is often not their primary area of focus. Companies specializing in life insurance tend to offer more competitive rates and have more aggressive underwriting."
+  },
+  {
+    "id": 26,
+    "question": "What Are The Advantages And Disadvantages To Long Term Care Insurance?",
+    "answer": "The main **advantage** of **Long-Term Care (LTC) Insurance** is the protection it offers against the significant costs of care in later years (e.g., nursing home, assisted living, in-home care). The primary **disadvantage** is the **cost of premiums** and the potential loss of economic opportunity if the policy is never used."
+  },
+  {
+    "id": 27,
+    "question": "Will Medicare Pay For Life Alert?",
+    "answer": "**Medicare** generally covers items considered **medically necessary** for the diagnosis or treatment of a medical condition, including some Durable Medical Equipment (DME) if prescribed by a doctor. Services like **Life Alert** (personal emergency response systems) are typically **not considered medically necessary** and are not covered."
+  },
+  {
+    "id": 28,
+    "question": "Which Life Insurance Should I Buy?",
+    "answer": "The most suitable **life insurance** depends on your financial goals. **Term Life Insurance** is best for **temporary financial exposure** (e.g., covering a mortgage or college years). **Permanent Life Insurance** is used for lifelong liabilities or supplemental income. Permanent options include **Guaranteed Universal Life** (for guaranteed death benefit), **Participating Whole Life** or **Current Assumption Universal Life** (for interest crediting), or **Indexed/Variable Universal Life** (for potential market-linked growth)."
+  },
+  {
+    "id": 29,
+    "question": "Does Medicare Pay For HPV Screening?",
+    "answer": "**Medicare** generally covers regular health exams, including most women's gynecological exams and tests. **HPV screening** is typically included as part of a routine pelvic exam and Pap test and is covered by Medicare."
+  },
+  {
+    "id": 30,
+    "question": "Which Is The Best Life Insurance To Get?",
+    "answer": "There is no single \"best\" life insurance; the right policy depends entirely on your specific **needs and financial objectives** (e.g., debt coverage, income replacement, wealth transfer). For permanent needs, a **Whole Life** or **Universal Life** policy may provide maximum value, but a **Term** policy is best for purely temporary coverage."
+  },
+  {
+    "id": 31,
+    "question": "How Much Should Long Term Care Insurance Cost?",
+    "answer": "**Long-Term Care (LTC) Insurance** premiums vary significantly based on **age, health, policy features, and location**. Premiums generally increase the older you are when you purchase the policy. A general guide for potential cost can be seen in the IRS limits for LTC premium deductibility (which are age-based)."
+  },
+  {
+    "id": 32,
+    "question": "How Safe Are Fixed Annuities?",
+    "answer": "The safety of **Tax-Deferred, Fixed Annuities** relies on the **contractual guarantees** and the **financial strength and claims-paying ability of the issuing insurance company**. The insurer's portfolio is generally conservative, often dominated by government and corporate bonds, which supports the guaranteed fixed interest rate."
+  },
+  {
+    "id": 33,
+    "question": "How Long Does It Take To Settle A Life Insurance Claim?",
+    "answer": "The life insurance death claim process usually takes between **30 and 60 days** once the beneficiaries submit the claim forms along with the death certificate and obituary. If the death occurred within the first **two years** of the policy's issuance (the **contestability period**), a standard investigation may ensue, which can **delay payment**."
+  },
+  {
+    "id": 34,
+    "question": "Is Car Insurance Credit Checked?",
+    "answer": "When applying for auto insurance, most carriers will perform a **soft pull** of an insured's credit history to generate an **Insurance Score**. This soft pull generally **does not adversely affect a person's credit rating**. The insurance score is one of many factors used to calculate the final premium rate."
+  },
+  {
+    "id": 35,
+    "question": "Can I Use HSA To Pay For Long Term Care Insurance?",
+    "answer": "Yes, you can use funds from a **Health Savings Account (HSA)** to pay for **Long-Term Care (LTC) Insurance** premiums. However, the amount of premiums that can be paid tax-free using HSA funds is **limited** by age-based annual limits set by the IRS (and listed in the instructions for Form 1040, Schedule A)."
+  },
+  {
+    "id": 36,
+    "question": "Can Employers Charge Smokers More For Health Insurance?",
+    "answer": "Yes. The **Affordable Care Act (ACA)** explicitly allows for the adjustment of health insurance rates based on **tobacco use**. Employers can apply a **premium surcharge** for tobacco users, as this is one of the few characteristics for which rate adjustments are legally permissible under the ACA."
+  },
+  {
+    "id": 37,
+    "question": "What Does Home Owners Insurance Usually Cover?",
+    "answer": "A standard **Homeowners Insurance** policy generally covers multiple types of losses, including: structural damage from perils like **fire, theft, vandalism, wind, hail, and lightning**; damage from covered incidents like **burst pipes**; and **liability** if a person is injured on your property. Coverage details, including inclusions and exclusions, are specific to each policy and state."
+  },
+  {
+    "id": 38,
+    "question": "How Much Does An Ultrasound Cost Without Health Insurance?",
+    "answer": "The cost of an **ultrasound** without insurance can vary significantly, often ranging from a few hundred dollars or more depending on the type of ultrasound and the provider. It is highly recommended to **ask your doctor about costs in advance** and attempt to negotiate a self-pay rate."
+  },
+  {
+    "id": 39,
+    "question": "What Is 10 Yr Term Life Insurance?",
+    "answer": "A **10-Year Term Life Insurance** policy provides a specified amount of coverage for a fixed period of **ten years**. Once the term expires, the coverage ends, and there is **no cash value or death benefit** (unless renewed at a dramatically higher rate). This type of policy is typically used to cover short-term financial obligations, such as a large loan or a specific period of dependency."
+  },
+  {
+    "id": 40,
+    "question": "Can You Put Money In A 401K And A Roth IRA?",
+    "answer": "Yes, you **can and should** contribute to both a **401(k) plan** (if offered by your employer) and a **Roth IRA**. It is often recommended to contribute enough to the 401(k) to receive the **full employer match** (if available) before maximizing contributions to the Roth IRA, as the employer match is 'free money'."
+  },
+  {
+    "id": 41,
+    "question": "Can I Get Health Insurance With Hepatitis C?",
+    "answer": "Yes, you can purchase health insurance with **Hepatitis C** as a preexisting medical condition. Under the **Affordable Care Act (ACA)**, health plans are required to accept all applicants regardless of existing medical conditions during the annual open enrollment period, with no waiting period before benefits begin."
+  },
+  {
+    "id": 42,
+    "question": "When Can I Enroll In Medicare Part A?",
+    "answer": "**Medicare Part A** (Hospital Insurance) enrollment is **automatic** when you reach age 65, provided you have worked and paid into the system long enough. Enrollment also occurs if you receive **Social Security Disability** benefits, usually after a two-year waiting period."
+  },
+  {
+    "id": 43,
+    "question": "When Did Health Insurance Originate?",
+    "answer": "Early forms of health-related insurance, such as traveler's accident coverage, existed in the **1840s**. Disability policies became popular in the late **1800s**. Modern group health insurance emerged in the US around **1929** (e.g., Baylor University Hospital's standardized costs for teachers), leading to the development of organizations like Blue Cross/Blue Shield."
+  },
+  {
+    "id": 44,
+    "question": "How Important Is Health Care Insurance?",
+    "answer": "**Health Insurance** is highly important. It provides **financial protection** against high medical costs and allows individuals to access necessary care, including preventive check-ups. Having insurance typically leads to **earlier detection** and a more proactive approach to health needs."
+  },
+  {
+    "id": 45,
+    "question": "How Much Does It Cost To Get Renters Insurance?",
+    "answer": "**Renters Insurance** is generally inexpensive, with the average cost often ranging from **$60 to $120 per year**. Insuring multiple items (like a car and renter's policy) with the same carrier often results in a **multi-policy discount** on the auto coverage, which can significantly offset the cost of the renter's policy."
+  },
+  {
+    "id": 46,
+    "question": "Does My Home Insurance Cover Theft?",
+    "answer": "**Theft** is generally a named **covered peril** in most **Home Insurance** policies. This includes theft of **personal property** from within the home. Personal property theft **outside the home** (e.g., from a vehicle while traveling) is usually covered, though often subject to a lower limit (e.g., 10% of the total personal property amount). Any loss settlement is subject to the policy's deductible and will require a **police report**."
+  },
+  {
+    "id": 47,
+    "question": "How Does Renters Insurance Benefit The Landlord?",
+    "answer": "**Renters Insurance** benefits the landlord by **reducing their liability exposure**. If the tenant causes damage to the rental unit or if someone is injured within the tenant's apartment, the tenant's policy covers those claims first, rather than relying solely on the landlord's property and liability insurance."
+  }
+{
+  "id": 48,
+  "question": "What Is An Insurance Automation and Facilitation System?",
+  "answer": "An **Insurance Automation and Facilitation System** is a digital platform designed to streamline, simplify, and speed up core insurance processes. It automates tasks such as policy issuance, premium calculation, underwriting, document generation, claims handling, customer communication, and compliance tracking. By reducing manual work, it minimizes errors, increases efficiency, improves customer experience, and allows insurers and agents to manage operations more accurately and in real time."
+}
+]
